@@ -1,7 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
-    id 'kotlin'
-    id 'maven'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 dependencies {
@@ -11,23 +10,11 @@ dependencies {
     compileOnly "com.android.tools.lint:lint-api:$lint_version"
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 group = 'com.rocketzly'
 version = '0.0.7'
-
-// 发布到本地仓库
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri('../repo'))
-            pom.project {
-                artifactId = 'lintPlugin'
-            }
-        }
-    }
-}
 
 gradlePlugin {
     plugins {

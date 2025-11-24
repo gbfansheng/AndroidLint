@@ -14,7 +14,7 @@ import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
 /**
- * 添加执行日志
+ * 添加执行日志 - 兼容 AGP 7.0.4
  * Created by rocketzly on 2020/8/30.
  */
 class LogHelper : LintHelper {
@@ -26,15 +26,11 @@ class LogHelper : LintHelper {
     override fun apply(project: Project) {
         var startTime = 0L
         project.gradle.taskGraph.whenReady {
-            it.allTasks.find {
-                if (LintUtils.checkTaskIsIncrementOrFullLint(it, project)
-                ) {
-                    return@find true
-                }
-                return@find false
+            it.allTasks.find { task ->
+                LintUtils.checkTaskIsIncrementOrFullLint(task, project)
             }?.apply {
                 doFirst {
-                    if (it.name == LintCreationAction.TASK_NAME_LINT_INCREMENT) {
+                    if (name == LintCreationAction.TASK_NAME_LINT_INCREMENT) {
                         if (!project.hasProperty(PARAM_NAME_BASELINE)) {
                             throw LintException("lintIncrement必须要${PARAM_NAME_BASELINE}参数")
                         }
@@ -52,7 +48,12 @@ class LogHelper : LintHelper {
                         println("配置文件加载成功 Path：${configFile.absolutePath}")
                     }
                     println("本次扫描的issue id如下：")
-                    println((project.extensions.getByName("android") as? BaseExtension)?.lintOptions?.check)
+                    try {
+                        val androidExtension = project.extensions.findByName("android") as? BaseExtension
+                        println(androidExtension?.lintOptions?.check)
+                    } catch (e: Exception) {
+                        println("无法获取 lint 配置: ${e.message}")
+                    }
                     printSplitLine("lint配置信息")
                 }
                 doLast {
@@ -95,7 +96,7 @@ class LogHelper : LintHelper {
 
                     if (errorCount != 0) {
                         ScriptExecutor.exec(project, errorCount, summary)
-                        throw  LintException("lint检查发现错误")
+                        throw LintException("lint检查发现错误")
                     }
                 }
             }

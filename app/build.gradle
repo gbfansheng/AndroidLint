@@ -1,11 +1,18 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.4"
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.rocketzly.lintPlugin'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.rocketzly.androidlint"
@@ -25,6 +32,9 @@ android {
     }
 
 }
+
+// 手动应用 lint plugin 功能
+apply from: rootProject.file('lintplugin/manual-apply.gradle')
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

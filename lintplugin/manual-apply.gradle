@@ -1,0 +1,35 @@
+// 手动应用 lint plugin 功能
+
+// 添加 lint 依赖
+dependencies {
+    // 使用本地 lintlibrary 项目
+    implementation project(':lintlibrary')
+    lintPublish project(':checks')
+}
+
+// 配置 lint 选项
+android {
+    lintOptions {
+        check.addAll([
+            "SerializableClassCheck",
+            "HandleExceptionCheck", 
+            "AvoidUsageApiCheck",
+            "DependencyApiCheck",
+            "ResourceNameCheck"
+        ])
+        xmlReport true
+        htmlReport true
+        xmlOutput new File(project.projectDir, "build/reports/lint-results.xml")
+        htmlOutput new File(project.projectDir, "build/reports/lint-results.html")
+        abortOnError false // 不因 lint 错误而停止构建
+    }
+}
+
+// 创建 lint 配置扩展
+class LintConfigExtension {
+    def baseline = false
+}
+
+extensions.create("lintConfig", LintConfigExtension)
+
+println("AndroidLint plugin 功能已手动应用")

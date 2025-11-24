@@ -1,5 +1,7 @@
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,8 +10,8 @@ dependencies {
     compileOnly gradleApi()
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 def date = new Date().format("MMdd-HH-mm-ss")
 def originName = "${name}.jar"

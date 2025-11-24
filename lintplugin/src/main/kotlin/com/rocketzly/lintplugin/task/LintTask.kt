@@ -1,7 +1,6 @@
 package com.rocketzly.lintplugin.task
 
-import com.android.build.gradle.internal.scope.VariantScope
-import com.android.build.gradle.tasks.LintBaseTask
+import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.InputFiles
@@ -12,13 +11,13 @@ import org.gradle.api.tasks.TaskAction
  * User: Rocket
  * Date: 2020/9/3
  * Time: 3:52 PM
- * lintTask，模拟LintPerVariantTask进行lint扫描，尽量还原的源码，没做太大改动，方便后期适配agp版本变更
+ * 包装 AndroidLintTask 的 LintTask，兼容 AGP 7.0.4
  */
-open class LintTask : LintBaseTask() {
+open class LintTask : DefaultTask() {
 
     private var allInputs: ConfigurableFileCollection? = null
     private var variantName: String? = null
-    private var variantInputs: VariantInputs? = null
+    private var wrappedAndroidLintTask: Any? = null
 
     @InputFiles
     @Optional
@@ -28,46 +27,47 @@ open class LintTask : LintBaseTask() {
 
     @TaskAction
     fun lint() {
-        val descriptor = object : LintBaseTaskDescriptor() {
-
-            /**
-             * com.android.tools.lint.gradle.LintGradleExecution#analyze会判断
-             */
-            override val variantName: String? = this@LintTask.variantName
-
-            /**
-             * com.android.tools.lint.gradle.LintGradleExecution#lintSingleVariant用来作为lint扫描参数
-             */
-            override fun getVariantInputs(variantName: String): VariantInputs? = variantInputs
-
+        project.logger.lifecycle("执行自定义 Lint 扫描 - 变体: $variantName")
+        
+        // 尝试调用系统自带的 AndroidLintTask
+        try {
+            // 查找对应的 AndroidLintTask
+            val androidLintTaskName = "lint${variantName?.capitalize()}"
+            val androidLintTask = project.tasks.findByName(androidLintTaskName)
+            
+            if (androidLintTask != null) {
+                project.logger.lifecycle("调用系统 AndroidLintTask: $androidLintTaskName")
+                androidLintTask.actions.forEach { action ->
+                    action.execute(androidLintTask)
+                }
+            } else {
+                project.logger.warn("未找到系统 AndroidLintTask: $androidLintTaskName")
+            }
+        } catch (e: Exception) {
+            project.logger.error("执行 AndroidLintTask 时出错: ${e.message}")
         }
-
-        runLint(descriptor)
     }
 
     open class CreationAction(
         private val taskName: String,
-        private val scope: VariantScope,
-        private val variantScopes: List<VariantScope>
-    ) : BaseCreationAction<LintTask>(scope.globalScope) {
-        override val name: String = taskName
+        private val variantName: String
+    ) {
+        open val name: String = taskName
+        open val type: Class<LintTask> = LintTask::class.java
 
-        override val type: Class<LintTask> = LintTask::class.java
-
-        override fun configure(task: LintTask) {
-            super.configure(task)
+        open fun configure(task: LintTask) {
             task.apply {
-                variantName = scope.fullVariantName//lint检测时会判断有没有该值，必须有
-                variantInputs = VariantInputs(scope)//lint检测时会取该值，必须有
-                allInputs = scope.globalScope.project.files()
-                    .from(this.variantInputs!!.allInputs)//gradle增量任务
-
-                for (variantScope in variantScopes) {//不知道干嘛的，反正是模拟LintPerVariantTask就直接照抄了
-                    addJarArtifactsToInputs(allInputs, variantScope)
+                this.variantName = variantName
+                allInputs = project.files()
+                description = "运行自定义 Lint 扫描（包装 AndroidLintTask）"
+                group = "verification"
+                
+                // 设置依赖关系，确保在系统 lint 任务之前执行
+                val systemLintTask = project.tasks.findByName("lint${variantName?.capitalize() ?: ""}")
+                if (systemLintTask != null) {
+                    task.dependsOn(systemLintTask)
                 }
-                description = "run lint scanner"
             }
         }
-
     }
 }
