@@ -27,6 +27,9 @@ plugins {
 }
 
 allprojects {
+    group = 'io.github.gbfansheng'
+    version = '0.0.8'
+
     repositories {
         google()
         mavenCentral()

@@ -1,0 +1,570 @@
+[INFO]  JReleaser 1.20.0
+------------------------------------------------------------
+jreleaser 1.20.0
+------------------------------------------------------------
+Build time:   2025-08-31 16:01:32Z
+Revision:     16e3b060b85b214167e502e95c2ea9ece8c3f661
+JVM:          24.0.2 (Homebrew 24.0.2)
+------------------------------------------------------------
+[INFO]  Configuring with jreleaser.yml
+[INFO]    - basedir set to /Users/linfanm4/workspace/AndroidLint
+[INFO]    - outputdir set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser
+[INFO]  Reading configuration
+[DEBUG]   - basedir set to /Users/linfanm4/workspace/AndroidLint
+[DEBUG]   - baseOutputDirectory set to /Users/linfanm4/workspace/AndroidLint/out
+[DEBUG]   - outputDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser
+[DEBUG]   - checksumDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/checksums
+[DEBUG]   - catalogsDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/catalogs
+[DEBUG]   - signaturesDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/signatures
+[DEBUG]   - prepareDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/prepare
+[DEBUG]   - packageDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/package
+[DEBUG]   - publishDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/publish
+[DEBUG]   - downloadDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/download
+[DEBUG]   - assembleDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/assemble
+[DEBUG]   - artifactsDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/artifacts
+[DEBUG]   - deployDirectory set to /Users/linfanm4/workspace/AndroidLint/out/jreleaser/deploy
+[INFO]  git-root-search set to false
+[INFO]  Loading variables from /Users/linfanm4/.jreleaser/config.properties
+[WARN]  Variables source /Users/linfanm4/.jreleaser/config.properties does not exist
+[DEBUG] The following variables are defined in the current environment:
+[DEBUG]   JRELEASER_GPG_KEY_ID
+[DEBUG]   JRELEASER_GPG_PASSPHRASE
+[DEBUG]   JRELEASER_GPG_PUBLIC_KEY
+[DEBUG]   JRELEASER_GPG_SECRET_KEY
+[DEBUG]   JRELEASER_MAVENCENTRAL_PASSWORD
+[DEBUG]   JRELEASER_MAVENCENTRAL_TOKEN
+[DEBUG]   JRELEASER_MAVENCENTRAL_USERNAME
+[INFO]  Validating configuration
+[INFO]  Strict mode set to false
+[DEBUG]   [validation] --== DEPLOY ==--
+[DEBUG]   [validation] hooks
+[DEBUG]   [validation] hooks.command
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] hooks.script
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] hooks.jbang
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] project
+[DEBUG]   [validation] project.languages.java
+[DEBUG]   [validation] download
+[DEBUG]   [validation] catalog.swid
+[DEBUG]   [validation] assemble
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] signing
+[DEBUG]   [validation] release
+[DEBUG]   [validation] release.github
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] checksum
+[DEBUG]   [validation] deploy
+[DEBUG]   [validation] deploy.maven
+[DEBUG]   [validation] deploy.maven.mavenCentral
+[DEBUG]   [validation] deploy.maven.mavenCentral.sonatype
+[DEBUG]   [validation] upload
+[DEBUG]   [validation] catalog
+[DEBUG]   [validation] catalog.sbom
+[DEBUG]   [validation] catalog.sbom.cyclonedx
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] catalog.sbom.syft
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] catalog.github
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] catalog.slsa
+[DEBUG]   [validation] - disabled
+[DEBUG]   [validation] announce
+[DEBUG]   [validation] - disabled
+[DEBUG]   [postvalidation] project
+[DEBUG]   [postvalidation] signing
+environment:
+ 
+hooks:
+    enabled: false
+    active: NEVER
+    command:
+        enabled: false
+        active: NEVER
+    jbang:
+        enabled: false
+        active: NEVER
+    script:
+        enabled: false
+        active: NEVER
+ 
+project:
+    name: android-lint
+    version: 0.0.8
+    versionPattern: SEMVER
+    snapshot:
+        enabled: false
+        pattern: .*-SNAPSHOT
+        label: early-access
+        fullChangelog: false
+    description: Android lint plugin and library
+    license: Apache-2.0
+    authors:
+        gbfansheng
+    stereotype: NONE
+    links:
+        homepage: https://github.com/gbfansheng/AndroidLint
+        documentation: https://github.com/gbfansheng/AndroidLint
+        license: https://spdx.org/licenses/Apache-2.0.html
+        bugTracker: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues
+        vcsBrowser: https://github.com/gbfansheng/AndroidLint
+    languages:
+        java:
+            enabled: true
+            groupId: io.github.gbfansheng
+            artifactId: android-lint
+            jvmOptions:
+            environmentVariables:
+            multiProject: false
+ 
+platform:
+ 
+release:
+    github:
+        enabled: false
+        host: github.com
+        owner: gbfansheng
+        name: AndroidLint
+        token: **unset**
+        artifacts: true
+        files: true
+        checksums: true
+        catalogs: true
+        signatures: true
+        repoUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}
+        repoCloneUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}.git
+        commitUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/commits
+        srcUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/blob/{{repoBranch}}
+        downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
+        releaseNotesUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/tag/{{tagName}}
+        latestReleaseUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/latest
+        issueTrackerUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues
+        branch: xe
+        commitAuthor:
+        sign: false
+        skipTag: false
+        skipRelease: false
+        overwrite: false
+        update:
+            enabled: false
+        apiEndpoint: https://api.github.com
+        connectTimeout: 0
+        readTimeout: 0
+        changelog:
+            enabled: false
+            append:
+                enabled: false
+            links: false
+            skipMergeCommits: false
+            hide:
+            contributors:
+        milestone:
+            close: true
+        issues:
+            enabled: false
+            label:
+        prerelease:
+            enabled: false
+        draft: false
+        releaseNotes:
+            enabled: false
+        makeLatest: true
+ 
+checksum:
+    name: checksums.txt
+    individual: false
+    algorithms:
+        SHA_256
+    artifacts: true
+    files: true
+ 
+signing:
+    enabled: true
+    active: ALWAYS
+    armored: true
+    verify: true
+    mode: MEMORY
+    artifacts: true
+    files: true
+    checksums: true
+    catalogs: true
+    passphrase: ************
+    publicKey: ************
+    secretKey: ************
+ 
+announce:
+    enabled: true
+    article:
+        enabled: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: article
+            token: **unset**
+    bluesky:
+        enabled: false
+        handle: **unset**
+        password: **unset**
+    discord:
+        enabled: false
+        webhook: **unset**
+    discourse:
+        enabled: false
+        apiKey: **unset**
+        username: **unset**
+    discussions:
+        enabled: false
+    gitter:
+        enabled: false
+        webhook: **unset**
+    googlechat:
+        enabled: false
+        webhook: **unset**
+    linkedin:
+        enabled: false
+        owner: **unset**
+        accessToken: **unset**
+    smtp:
+        enabled: false
+        auth: false
+        password: **unset**
+    mastodon:
+        enabled: false
+        accessToken: **unset**
+    mattermost:
+        enabled: false
+        webhook: **unset**
+        structuredMessage: true
+    opencollective:
+        enabled: false
+        token: **unset**
+    sdkman:
+        enabled: false
+        consumerKey: **unset**
+        consumerToken: **unset**
+    slack:
+        enabled: false
+        webhook: **unset**
+        token: **unset**
+    teams:
+        enabled: false
+        webhook: **unset**
+    telegram:
+        enabled: false
+        token: **unset**
+        chatId: **unset**
+    twitter:
+        enabled: false
+        consumerKey: **unset**
+        consumerSecret: **unset**
+        accessToken: **unset**
+        accessTokenSecret: **unset**
+    zulip:
+        enabled: false
+        apiKey: **unset**
+ 
+packagers:
+    appimage:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        requiresTerminal: false
+        repository:
+            enabled: false
+            name: appimage
+            token: **unset**
+    asdf:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: asdf
+            token: **unset**
+    brew:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        multiPlatform: false
+        repository:
+            enabled: false
+            name: homebrew-tap
+            token: **unset**
+        cask:
+            enabled: false
+    chocolatey:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        apiKey: **unset**
+        remoteBuild: false
+        repository:
+            enabled: false
+            name: chocolatey-bucket
+            token: **unset**
+    docker:
+        enabled: false
+        useLocalArtifact: true
+        buildx:
+            enabled: false
+            createBuilder: true
+        commitAuthor:
+        repository:
+            enabled: false
+            name: docker
+            token: **unset**
+            versionedSubfolders: false
+        continueOnError: false
+        skipPublishing: false
+    flatpak:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: flatpak
+            token: **unset**
+    gofish:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: fish-food
+            token: **unset**
+    jbang:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: jbang-catalog
+            token: **unset**
+    jib:
+        enabled: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: jib
+            token: **unset**
+            versionedSubfolders: false
+        continueOnError: false
+        skipPublishing: false
+    macports:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: macports
+            token: **unset**
+    scoop:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: scoop
+            token: **unset**
+    sdkman:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        connectTimeout: 0
+        readTimeout: 0
+        consumerKey: **unset**
+        consumerToken: **unset**
+    snap:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        remoteBuild: false
+        repository:
+            enabled: false
+            name: snap
+            token: **unset**
+    spec:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        repository:
+            enabled: false
+            name: spec
+            token: **unset**
+    winget:
+        enabled: false
+        continueOnError: false
+        skipPublishing: false
+        commitAuthor:
+        package:
+        publisher:
+        installer:
+            type: WIX
+            scope: MACHINE
+            upgradeBehavior: INSTALL
+            dependencies:
+        repository:
+            enabled: false
+            name: winget
+            token: **unset**
+ 
+download:
+    enabled: true
+ 
+assemble:
+    enabled: true
+ 
+deploy:
+    enabled: true
+    active: ALWAYS
+    maven:
+        enabled: true
+        active: ALWAYS
+        pomchecker:
+            version: 1.14.0
+            failOnWarning: true
+            failOnError: true
+            strict: true
+        mavenCentral:
+            sonatype:
+                enabled: true
+                active: RELEASE
+                connectTimeout: 20
+                readTimeout: 60
+                authorization: BASIC
+                url: https://central.sonatype.com/api/v1/publisher
+                username: ************
+                password: ************
+                sign: true
+                checksums: false
+                sourceJar: true
+                javadocJar: true
+                verifyPom: false
+                applyMavenCentralRules: false
+                snapshotSupported: true
+                stagingRepositories:
+                    lintplugin/build/jreleaser/staging
+                stage: FULL
+                namespace: io.github.gbfansheng
+                retryDelay: 20
+                maxRetries: 100
+ 
+upload:
+    enabled: true
+ 
+catalog:
+    enabled: true
+    github:
+        enabled: false
+        active: NEVER
+        artifacts: true
+        files: true
+        deployables: true
+    sbom:
+        enabled: true
+        cyclonedx:
+            enabled: false
+            active: NEVER
+            distributions: false
+            files: false
+            pack:
+                enabled: false
+        syft:
+            enabled: false
+            active: NEVER
+            distributions: false
+            files: false
+            pack:
+                enabled: false
+    slsa:
+        enabled: false
+        active: NEVER
+        artifacts: true
+        files: true
+        deployables: true
+    swid:
+        enabled: false
+        name: swid-tag
+        corpus: false
+        patch: false
+ 
+[INFO]  Project version set to 0.0.8
+[INFO]  Release is not snapshot
+[INFO]  Timestamp is 2025-11-25T18:38:43.626667+08:00
+[INFO]  HEAD is at 0cb4562
+[INFO]  Platform is osx-aarch_64
+[DEBUG] loading extension default-jreleaser-mustache:org.jreleaser.extensions.internal.mustache.DefaultMustacheExtension
+[DEBUG] adding org.jreleaser.extensions.internal.mustache.DefaultMustacheExtensionPoint from default-jreleaser-mustache extension
+[INFO]  yolo set to false
+[INFO]  dry-run set to false
+[INFO]  Deploying Maven artifacts
+[INFO]    [maven] Deploying all staged artifacts
+[INFO]      [mavenCentral] Deploying to sonatype
+[INFO]      [mavenCentral] Verifying prerequisites
+[WARN]      [mavenCentral] Signing key EFD7DAFAAD52CE59 does not expire
+[INFO]      [mavenCentral] Checking if key EFD7DAFAAD52CE59 has been published
+[DEBUG]     [mavenCentral]  + https://keys.openpgp.org
+[DEBUG]     [mavenCentral]  + https://keys.openpgp.org
+[DEBUG]     [mavenCentral]  x https://keys.openpgp.org
+[INFO]      [mavenCentral] Key EFD7DAFAAD52CE59 was found as published
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintplugin/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central15118969853649019921
+[INFO]      [mavenCentral]  - io.github.gbfansheng-android-lint-0.0.8-bundle.zip
+[INFO]      [mavenCentral] Uploading io.github.gbfansheng-android-lint-0.0.8-bundle.zip
+[INFO]      [mavenCentral] Bundle io.github.gbfansheng-android-lint-0.0.8-bundle.zip uploaded as deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] waiting for deployment (529fa90f-8353-4d35-9f97-4834462e5ffa) state to be one of [VALIDATED, FAILED]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 1 of 101
+[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@54ffa561]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Publishing deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] waiting for deployment (529fa90f-8353-4d35-9f97-4834462e5ffa) state to be one of [PUBLISHED, FAILED]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 1 of 101
+[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@531ec978]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 2 of 101
+[DEBUG]     [mavenCentral] attempt 2/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@db99785]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 3 of 101
+[DEBUG]     [mavenCentral] attempt 3/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@1b4872bc]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 4 of 101
+[DEBUG]     [mavenCentral] attempt 4/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@72028a45]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 5 of 101
+[DEBUG]     [mavenCentral] attempt 5/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@7b222230]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 6 of 101
+[DEBUG]     [mavenCentral] attempt 6/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@a54acec]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 7 of 101
+[DEBUG]     [mavenCentral] attempt 7/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@3c19592c]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 8 of 101
+[DEBUG]     [mavenCentral] attempt 8/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@4f7be6c8]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 9 of 101
+[DEBUG]     [mavenCentral] attempt 9/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@69c532af]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 10 of 101
+[DEBUG]     [mavenCentral] attempt 10/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@12d40609]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Attempt 11 of 101
+[DEBUG]     [mavenCentral] attempt 11/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@353f472a]
+[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]  Writing output properties to out/jreleaser/output.properties
+[INFO]  JReleaser succeeded after 04:37 m

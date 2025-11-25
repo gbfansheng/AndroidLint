@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // 使用与业务工程 AGP 4.1.1 对应的 lint-api 版本（27.1.1 是 4.1.1 随带的版本）
+    compileOnly "com.android.tools.lint:lint-api:27.1.1"
+    compileOnly "com.android.tools.lint:lint-checks:27.1.1"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+group = 'io.github.gbfansheng'
+version = '0.0.1'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'io.github.gbfansheng'
+            artifactId = 'lintPatch41'
+            version = '0.0.1'
+        }
+    }
+}

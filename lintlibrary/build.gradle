@@ -9,11 +9,13 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
 if (upload_lint_library) {
     apply plugin: 'com.novoda.bintray-release'
     publish {
         userOrg = 'zhuliyuan' //bintray注册的用户名（不是邮箱）
-        groupId = 'com.rocketzly'
+        groupId = 'io.github.gbfansheng'
         artifactId = 'lint' //项目名称
         publishVersion = '1.0.3' //版本号
         desc = 'android lint' //项目描述。可空。
@@ -21,6 +23,8 @@ if (upload_lint_library) {
     }
 }
 
+group = 'io.github.gbfansheng'
+version = '1.0.3'
 
 android {
     compileSdkVersion 29
@@ -34,4 +38,17 @@ android {
 
 dependencies {
     lintPublish project(':checks')
+}
+
+publishing {
+    publications {
+        mavenAar(MavenPublication) {
+            groupId = 'io.github.gbfansheng'
+            artifactId = 'lint'
+            version = '1.0.3'
+
+            // 直接发布已构建的 release AAR；需要先手动执行 assembleRelease
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+        }
+    }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
 }
 
 dependencies {
@@ -13,27 +14,68 @@ dependencies {
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
-group = 'com.rocketzly'
-version = '0.0.7'
+group = 'io.github.gbfansheng'
+version = '0.0.8'
+
+// sources / javadoc jars for Maven Central
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier.set('javadoc')
+}
 
 gradlePlugin {
     plugins {
         lintPlugin {
-            id = 'com.rocketzly.lintPlugin'//plugin id
+            id = 'io.github.gbfansheng.lintPlugin'//plugin id
             implementationClass = 'com.rocketzly.lintplugin.LintPlugin'
         }
     }
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = 'android-lint-plugin'
 
-if (upload_lint_plugin) {
-    apply plugin: 'com.novoda.bintray-release'
-    publish {
-        userOrg = 'zhuliyuan' //bintray注册的用户名（不是邮箱）
-        groupId = 'com.rocketzly'
-        artifactId = 'lintPlugin' //项目名称
-        publishVersion = version //版本号
-        desc = 'an android lint plugin,used to check code specifications, bugs, etc' //项目描述。可空。
-        website = 'https://github.com/RocketZLY/AndroidLint' //项目地址，一般填github地址。可空。
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = 'android-lint-plugin'
+                description = 'Android lint Gradle plugin'
+                url = 'https://github.com/gbfansheng/AndroidLint'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'gbfansheng'
+                        name = 'gbfansheng'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/gbfansheng/AndroidLint'
+                    connection = 'scm:git:https://github.com/gbfansheng/AndroidLint.git'
+                    developerConnection = 'scm:git:git@github.com:gbfansheng/AndroidLint.git'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "jreleaserStaging"
+            url = layout.buildDirectory.dir("jreleaser/staging")
+        }
     }
 }
+

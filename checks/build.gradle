@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
 }
 
 dependencies {
@@ -24,3 +25,13 @@ jar {
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            // group、version 继承自根工程 allprojects 配置: io.github.gbfansheng:checks:0.0.8
+            artifactId = 'checks'
+        }
+    }
+}

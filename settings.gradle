@@ -1,5 +1,6 @@
 rootProject.name = 'Android Lint'
 include ':lintpatch'
+include ':lintpatch41'
 include ':app'
 include ':checks'
 include ':lintlibrary'
