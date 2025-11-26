@@ -2,7 +2,7 @@
   "formatVersion": "1.1",
   "component": {
     "group": "io.github.gbfansheng",
-    "module": "lintPatch41",
+    "module": "lintpatch41",
     "version": "0.0.1",
     "attributes": {
       "org.gradle.status": "release"
@@ -19,16 +19,16 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
         "org.gradle.jvm.version": 8,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api",
-        "org.jetbrains.kotlin.localToProject": "public",
         "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "files": [
         {
-          "name": "lintPatch41-0.0.1.jar",
-          "url": "lintPatch41-0.0.1.jar",
+          "name": "lintpatch41-0.0.1.jar",
+          "url": "lintpatch41-0.0.1.jar",
           "size": 261,
           "sha512": "e14ca12f40c7f35e6868e3748691450099d4962acafdbb506582f5787c208e33e720496b989c91eac3b03232379a9da30d096d13d5d4379226ff17434e9e2791",
           "sha256": "8c2988f2369ce62ef201fa1a91af36915cdca0a0e611fb22df2844f6790d22b0",
@@ -42,16 +42,16 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
         "org.gradle.jvm.version": 8,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.localToProject": "public",
         "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "files": [
         {
-          "name": "lintPatch41-0.0.1.jar",
-          "url": "lintPatch41-0.0.1.jar",
+          "name": "lintpatch41-0.0.1.jar",
+          "url": "lintpatch41-0.0.1.jar",
           "size": 261,
           "sha512": "e14ca12f40c7f35e6868e3748691450099d4962acafdbb506582f5787c208e33e720496b989c91eac3b03232379a9da30d096d13d5d4379226ff17434e9e2791",
           "sha256": "8c2988f2369ce62ef201fa1a91af36915cdca0a0e611fb22df2844f6790d22b0",

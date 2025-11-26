@@ -15,44 +15,14 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 group = 'io.github.gbfansheng'
-version = '0.0.2'
-
-def date = new Date().format("MMdd-HH-mm-ss")
-def originName = "${name}.jar"
-def newName = "${name}-${date}.jar"
-
-task makeJar(type: Copy) {
-    doFirst {
-        delete('build/export/')
-    }
-    from('build/libs') {
-        include originName
-    }
-    into('build/export')
-    rename(originName, newName)
-}
-
-makeJar.dependsOn(build)
-
-if (upload_lint_patch) {
-    apply plugin: 'com.novoda.bintray-release'
-    publish {
-        userOrg = 'zhuliyuan' //bintray注册的用户名（不是邮箱）
-        groupId = 'io.github.gbfansheng'
-        artifactId = 'lintPatch' //项目名称
-        publishVersion = '0.0.2' //版本号
-        desc = 'a lint patch' //项目描述。可空。
-        website = 'https://github.com/RocketZLY/AndroidLint' //项目地址，一般填github地址。可空。
-    }
-}
+version = VERSION_LINT_PATCH
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            groupId = 'io.github.gbfansheng'
-            artifactId = 'lintPatch'
-            version = '0.0.2'
+            artifactId = 'lintpatch'
         }
     }
 }
+
+apply from: "$rootDir/publish.gradle"

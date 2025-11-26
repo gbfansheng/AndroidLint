@@ -1,0 +1,64 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+if (!project.tasks.findByName('sourcesJar')) {
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allSource
+        archiveClassifier.set('sources')
+    }
+}
+
+if (!project.tasks.findByName('javadocJar')) {
+    task javadocJar(type: Jar) {
+        from javadoc
+        archiveClassifier.set('javadoc')
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            groupId = 'io.github.gbfansheng'
+
+            pom {
+                name = project.name
+                description = 'Android lint plugin and library'
+                url = 'https://github.com/gbfansheng/AndroidLint'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'gbfansheng'
+                        name = 'gbfansheng'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/gbfansheng/AndroidLint'
+                    connection = 'scm:git:https://github.com/gbfansheng/AndroidLint.git'
+                    developerConnection = 'scm:git:git@github.com:gbfansheng/AndroidLint.git'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "jreleaserStaging"
+            url = layout.buildDirectory.dir("jreleaser/staging")
+        }
+    }
+}
+
+signing {
+    def signingKey = findProperty("signingKey") ?: System.getenv("JRELEASER_GPG_SECRET_KEY")
+    def signingPassword = findProperty("signingPassword") ?: System.getenv("JRELEASER_GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications
+}

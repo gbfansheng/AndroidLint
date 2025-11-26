@@ -26,12 +26,14 @@ jar {
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
+version = VERSION_CHECKS
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            // group、version 继承自根工程 allprojects 配置: io.github.gbfansheng:checks:0.0.8
             artifactId = 'checks'
         }
     }
 }
+
+apply from: "$rootDir/publish.gradle"

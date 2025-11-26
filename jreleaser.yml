@@ -33,4 +33,8 @@ deploy:
         sign: true
         applyMavenCentralRules: false
         stagingRepositories:
+          - "checks/build/jreleaser/staging"
+          - "lintlibrary/build/jreleaser/staging"
+          - "lintpatch/build/jreleaser/staging"
+          - "lintpatch41/build/jreleaser/staging"
           - "lintplugin/build/jreleaser/staging"

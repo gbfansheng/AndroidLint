@@ -10,21 +10,10 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
-
-if (upload_lint_library) {
-    apply plugin: 'com.novoda.bintray-release'
-    publish {
-        userOrg = 'zhuliyuan' //bintray注册的用户名（不是邮箱）
-        groupId = 'io.github.gbfansheng'
-        artifactId = 'lint' //项目名称
-        publishVersion = '1.0.3' //版本号
-        desc = 'android lint' //项目描述。可空。
-        website = 'https://github.com/RocketZLY/AndroidLint' //项目地址，一般填github地址。可空。
-    }
-}
+apply plugin: 'signing'
 
 group = 'io.github.gbfansheng'
-version = '1.0.3'
+version = VERSION_LINT_LIBRARY
 
 android {
     compileSdkVersion 29
@@ -32,7 +21,6 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 29
-
     }
 }
 
@@ -40,15 +28,58 @@ dependencies {
     lintPublish project(':checks')
 }
 
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId = 'io.github.gbfansheng'
-            artifactId = 'lint'
-            version = '1.0.3'
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
+}
 
-            // 直接发布已构建的 release AAR；需要先手动执行 assembleRelease
-            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'io.github.gbfansheng'
+                artifactId = 'lint'
+                version = version
+
+                artifact sourcesJar
+
+                pom {
+                    name = 'lint'
+                    description = 'Android lint library'
+                    url = 'https://github.com/gbfansheng/AndroidLint'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'gbfansheng'
+                            name = 'gbfansheng'
+                        }
+                    }
+                    scm {
+                        url = 'https://github.com/gbfansheng/AndroidLint'
+                        connection = 'scm:git:https://github.com/gbfansheng/AndroidLint.git'
+                        developerConnection = 'scm:git:git@github.com:gbfansheng/AndroidLint.git'
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "jreleaserStaging"
+                url = layout.buildDirectory.dir("jreleaser/staging")
+            }
         }
     }
+}
+
+signing {
+    def signingKey = findProperty("signingKey") ?: System.getenv("JRELEASER_GPG_SECRET_KEY")
+    def signingPassword = findProperty("signingPassword") ?: System.getenv("JRELEASER_GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications
 }

@@ -4,7 +4,7 @@ jreleaser 1.20.0
 ------------------------------------------------------------
 Build time:   2025-08-31 16:01:32Z
 Revision:     16e3b060b85b214167e502e95c2ea9ece8c3f661
-JVM:          24.0.2 (Homebrew 24.0.2)
+JVM:          1.8.0_462 (Temurin 25.462-b08)
 ------------------------------------------------------------
 [INFO]  Configuring with jreleaser.yml
 [INFO]    - basedir set to /Users/linfanm4/workspace/AndroidLint
@@ -27,12 +27,10 @@ JVM:          24.0.2 (Homebrew 24.0.2)
 [INFO]  Loading variables from /Users/linfanm4/.jreleaser/config.properties
 [WARN]  Variables source /Users/linfanm4/.jreleaser/config.properties does not exist
 [DEBUG] The following variables are defined in the current environment:
-[DEBUG]   JRELEASER_GPG_KEY_ID
 [DEBUG]   JRELEASER_GPG_PASSPHRASE
 [DEBUG]   JRELEASER_GPG_PUBLIC_KEY
 [DEBUG]   JRELEASER_GPG_SECRET_KEY
 [DEBUG]   JRELEASER_MAVENCENTRAL_PASSWORD
-[DEBUG]   JRELEASER_MAVENCENTRAL_TOKEN
 [DEBUG]   JRELEASER_MAVENCENTRAL_USERNAME
 [INFO]  Validating configuration
 [INFO]  Strict mode set to false
@@ -141,7 +139,7 @@ release:
         releaseNotesUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/tag/{{tagName}}
         latestReleaseUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/latest
         issueTrackerUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues
-        branch: xe
+        branch: master
         commitAuthor:
         sign: false
         skipTag: false
@@ -456,6 +454,10 @@ deploy:
                 applyMavenCentralRules: false
                 snapshotSupported: true
                 stagingRepositories:
+                    checks/build/jreleaser/staging
+                    lintlibrary/build/jreleaser/staging
+                    lintpatch/build/jreleaser/staging
+                    lintpatch41/build/jreleaser/staging
                     lintplugin/build/jreleaser/staging
                 stage: FULL
                 namespace: io.github.gbfansheng
@@ -503,9 +505,9 @@ catalog:
  
 [INFO]  Project version set to 0.0.8
 [INFO]  Release is not snapshot
-[INFO]  Timestamp is 2025-11-25T18:38:43.626667+08:00
-[INFO]  HEAD is at 0cb4562
-[INFO]  Platform is osx-aarch_64
+[INFO]  Timestamp is 2025-11-26T14:50:08.192+08:00
+[INFO]  HEAD is at d1f27fe
+[INFO]  Platform is osx-x86_64
 [DEBUG] loading extension default-jreleaser-mustache:org.jreleaser.extensions.internal.mustache.DefaultMustacheExtension
 [DEBUG] adding org.jreleaser.extensions.internal.mustache.DefaultMustacheExtensionPoint from default-jreleaser-mustache extension
 [INFO]  yolo set to false
@@ -519,52 +521,132 @@ catalog:
 [DEBUG]     [mavenCentral]  + https://keys.openpgp.org
 [DEBUG]     [mavenCentral]  + https://keys.openpgp.org
 [DEBUG]     [mavenCentral]  x https://keys.openpgp.org
+[DEBUG]     [mavenCentral] Unexpected error Read timed out
 [INFO]      [mavenCentral] Key EFD7DAFAAD52CE59 was found as published
-[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintplugin/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central15118969853649019921
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.jar.asc
+[INFO]      [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.jar
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.jar.asc
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.pom.asc
+[INFO]      [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.pom
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.pom.asc
+[DEBUG]     [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-sources.jar is newer than lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-sources.jar.asc
+[INFO]      [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-sources.jar
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-sources.jar.asc
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.pom.asc
+[INFO]      [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.pom
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.pom.asc
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.aar.asc
+[INFO]      [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.aar
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.aar.asc
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.pom.asc
+[INFO]      [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.pom
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.pom.asc
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-javadoc.jar.asc
+[INFO]      [sign] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-javadoc.jar
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-javadoc.jar.asc
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.module.asc
+[INFO]      [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.module
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.module.asc
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.jar.asc
+[INFO]      [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.jar
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.jar.asc
+[DEBUG]     [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-javadoc.jar is newer than checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-javadoc.jar.asc
+[INFO]      [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-javadoc.jar
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-javadoc.jar.asc
+[DEBUG]     [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.module is newer than lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.module.asc
+[INFO]      [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.module
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3.module.asc
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-sources.jar.asc
+[INFO]      [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-sources.jar
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8-sources.jar.asc
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.jar.asc
+[INFO]      [sign] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.jar
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.jar.asc
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.jar.asc
+[INFO]      [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.jar
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.jar.asc
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.module.asc
+[INFO]      [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.module
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1.module.asc
+[DEBUG]     [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-sources.jar is newer than lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-sources.jar.asc
+[INFO]      [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-sources.jar
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-sources.jar.asc
+[DEBUG]     [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3-sources.jar is newer than lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3-sources.jar.asc
+[INFO]      [sign] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3-sources.jar
+[DEBUG]     [verify] lintlibrary/build/jreleaser/staging/io/github/gbfansheng/lint/1.0.3/lint-1.0.3-sources.jar.asc
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.module.asc
+[INFO]      [sign] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.module
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.module.asc
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-sources.jar.asc
+[INFO]      [sign] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-sources.jar
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2-sources.jar.asc
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.pom.asc
+[INFO]      [sign] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.pom
+[DEBUG]     [verify] checks/build/jreleaser/staging/io/github/gbfansheng/checks/0.0.8/checks-0.0.8.pom.asc
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.pom.asc
+[INFO]      [sign] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.pom
+[DEBUG]     [verify] lintpatch/build/jreleaser/staging/io/github/gbfansheng/lintpatch/0.0.2/lintpatch-0.0.2.pom.asc
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-javadoc.jar.asc
+[INFO]      [sign] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-javadoc.jar
+[DEBUG]     [verify] lintpatch41/build/jreleaser/staging/io/github/gbfansheng/lintpatch41/0.0.1/lintpatch41-0.0.1-javadoc.jar.asc
+[DEBUG]     [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.module is newer than lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.module.asc
+[INFO]      [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.module
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8.module.asc
+[DEBUG]     [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-javadoc.jar is newer than lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-javadoc.jar.asc
+[INFO]      [sign] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-javadoc.jar
+[DEBUG]     [verify] lintplugin/build/jreleaser/staging/io/github/gbfansheng/lintplugin/0.0.8/lintplugin-0.0.8-javadoc.jar.asc
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/checks/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central2529665385886247894
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintlibrary/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central2529665385886247894
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintpatch/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central2529665385886247894
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintpatch41/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central2529665385886247894
+[DEBUG]     [mavenCentral] copying files from /Users/linfanm4/workspace/AndroidLint/lintplugin/build/jreleaser/staging to /var/folders/91/9rb4jjy537g7mx7fs_cb49kc0000gn/T/maven-central2529665385886247894
 [INFO]      [mavenCentral]  - io.github.gbfansheng-android-lint-0.0.8-bundle.zip
 [INFO]      [mavenCentral] Uploading io.github.gbfansheng-android-lint-0.0.8-bundle.zip
-[INFO]      [mavenCentral] Bundle io.github.gbfansheng-android-lint-0.0.8-bundle.zip uploaded as deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
-[DEBUG]     [mavenCentral] waiting for deployment (529fa90f-8353-4d35-9f97-4834462e5ffa) state to be one of [VALIDATED, FAILED]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[INFO]      [mavenCentral] Bundle io.github.gbfansheng-android-lint-0.0.8-bundle.zip uploaded as deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[DEBUG]     [mavenCentral] waiting for deployment (85096096-85be-4f21-a71f-f6160fd7ee0f) state to be one of [VALIDATED, FAILED]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 1 of 101
-[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@54ffa561]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
-[INFO]      [mavenCentral] Publishing deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
-[DEBUG]     [mavenCentral] waiting for deployment (529fa90f-8353-4d35-9f97-4834462e5ffa) state to be one of [PUBLISHED, FAILED]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@2133661d]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[INFO]      [mavenCentral] Publishing deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[DEBUG]     [mavenCentral] waiting for deployment (85096096-85be-4f21-a71f-f6160fd7ee0f) state to be one of [PUBLISHED, FAILED]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 1 of 101
-[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@531ec978]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 1/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@10643593]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 2 of 101
-[DEBUG]     [mavenCentral] attempt 2/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@db99785]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 2/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@6ed16657]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 3 of 101
-[DEBUG]     [mavenCentral] attempt 3/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@1b4872bc]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 3/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@113e13f9]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 4 of 101
-[DEBUG]     [mavenCentral] attempt 4/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@72028a45]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 4/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@2def7a7a]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 5 of 101
-[DEBUG]     [mavenCentral] attempt 5/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@7b222230]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 5/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@5c080ef3]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 6 of 101
-[DEBUG]     [mavenCentral] attempt 6/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@a54acec]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 6/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@36a6bea6]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 7 of 101
-[DEBUG]     [mavenCentral] attempt 7/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@3c19592c]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 7/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@9b21bd3]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 8 of 101
-[DEBUG]     [mavenCentral] attempt 8/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@4f7be6c8]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 8/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@78cd163b]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 9 of 101
-[DEBUG]     [mavenCentral] attempt 9/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@69c532af]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 9/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@65a48602]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 10 of 101
-[DEBUG]     [mavenCentral] attempt 10/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@12d40609]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
+[DEBUG]     [mavenCentral] attempt 10/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@612e21b9]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
 [INFO]      [mavenCentral] Attempt 11 of 101
-[DEBUG]     [mavenCentral] attempt 11/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@353f472a]
-[DEBUG]     [mavenCentral] querying status for deployment 529fa90f-8353-4d35-9f97-4834462e5ffa
-[INFO]  Writing output properties to out/jreleaser/output.properties
-[INFO]  JReleaser succeeded after 04:37 m
+[DEBUG]     [mavenCentral] attempt 11/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@7efd28bd]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[INFO]      [mavenCentral] Attempt 12 of 101
+[DEBUG]     [mavenCentral] attempt 12/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@44bd4b0a]
+[DEBUG]     [mavenCentral] querying status for deployment 85096096-85be-4f21-a71f-f6160fd7ee0f
+[INFO]      [mavenCentral] Attempt 13 of 101
+[DEBUG]     [mavenCentral] attempt 13/101 failed with result: Optional[org.jreleaser.sdk.mavencentral.api.Deployment@472a11ae]

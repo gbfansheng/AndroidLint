@@ -16,15 +16,14 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 group = 'io.github.gbfansheng'
-version = '0.0.1'
+version = VERSION_LINT_PATCH41
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            groupId = 'io.github.gbfansheng'
-            artifactId = 'lintPatch41'
-            version = '0.0.1'
+            artifactId = 'lintpatch41'
         }
     }
 }
+
+apply from: "$rootDir/publish.gradle"

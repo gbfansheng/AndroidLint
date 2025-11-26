@@ -14,19 +14,7 @@ dependencies {
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
-group = 'io.github.gbfansheng'
-version = '0.0.8'
-
-// sources / javadoc jars for Maven Central
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    archiveClassifier.set('sources')
-}
-
-task javadocJar(type: Jar) {
-    from javadoc
-    archiveClassifier.set('javadoc')
-}
+version = VERSION_LINT_PLUGIN
 
 gradlePlugin {
     plugins {
@@ -35,47 +23,17 @@ gradlePlugin {
             implementationClass = 'com.rocketzly.lintplugin.LintPlugin'
         }
     }
+    // 禁用自动发布，使用自定义的mavenJava发布
+    automatedPublishing = false
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            artifactId = 'android-lint-plugin'
-
-            artifact sourcesJar
-            artifact javadocJar
-
-            pom {
-                name = 'android-lint-plugin'
-                description = 'Android lint Gradle plugin'
-                url = 'https://github.com/gbfansheng/AndroidLint'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'gbfansheng'
-                        name = 'gbfansheng'
-                    }
-                }
-                scm {
-                    url = 'https://github.com/gbfansheng/AndroidLint'
-                    connection = 'scm:git:https://github.com/gbfansheng/AndroidLint.git'
-                    developerConnection = 'scm:git:git@github.com:gbfansheng/AndroidLint.git'
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "jreleaserStaging"
-            url = layout.buildDirectory.dir("jreleaser/staging")
+            artifactId = 'lintplugin'
         }
     }
 }
+
+apply from: "$rootDir/publish.gradle"
 

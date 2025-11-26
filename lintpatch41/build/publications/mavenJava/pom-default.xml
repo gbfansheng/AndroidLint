@@ -7,6 +7,26 @@
   <!-- do_not_remove: published-with-gradle-metadata -->
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.gbfansheng</groupId>
-  <artifactId>lintPatch41</artifactId>
+  <artifactId>lintpatch41</artifactId>
   <version>0.0.1</version>
+  <name>lintpatch41</name>
+  <description>Android lint plugin and library</description>
+  <url>https://github.com/gbfansheng/AndroidLint</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>gbfansheng</id>
+      <name>gbfansheng</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/gbfansheng/AndroidLint.git</connection>
+    <developerConnection>scm:git:git@github.com:gbfansheng/AndroidLint.git</developerConnection>
+    <url>https://github.com/gbfansheng/AndroidLint</url>
+  </scm>
 </project>
